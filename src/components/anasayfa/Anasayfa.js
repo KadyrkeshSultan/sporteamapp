@@ -14,8 +14,4 @@ class Anasayfa extends React.Component {
     }
 }
 
-Anasayfa.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
 export default Anasayfa;

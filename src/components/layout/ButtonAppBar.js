@@ -51,18 +51,27 @@ const styles = {
 const menuIcons = [
     {
         text: 'Главная',
+        url: '/',
         icon: <HomeIcon />
     },
     {
         text: 'Все мероприятия',
+        url: '/events',
         icon: <EventIcon/>
     },
     {
+        text: 'Площадки',
+        url: '/areas',
+        icon: <MapIcon/>
+    },
+    {
         text: 'Участники',
+        url: '/',
         icon: <PeopleIcon/>
     },
     {
         text: 'Поделиться',
+        url: '/',
         icon: <ShareIcon/>
     }
 ]
@@ -86,7 +95,7 @@ class ButtonAppBar extends React.Component {
               <List>
                   {
                       menuIcons.map(item => {
-                          return <ListItem button key={item.text}>
+                          return <ListItem button component="a" href={item.url} key={item.text}>
                                 <ListItemIcon>{item.icon}</ListItemIcon>
                                 <ListItemText primary={item.text} />
                           </ListItem>
