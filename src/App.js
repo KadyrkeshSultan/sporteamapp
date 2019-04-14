@@ -15,12 +15,13 @@ import Dashboard2 from './components/dashboard/Dashboard'
 import Sandbox from './components/layout/Sandbox';
 import history from './components/layout/history';
 import NotFoundPage from './components/layout/NotFoundPage';
+import Anasayfa from './components/anasayfa/Anasayfa';
 class App extends Component {
   render() {
     return (
       <Router history={history}>
         <div className="App">
-          <ButtonAppBar />
+          
           <Switch>
             <Route exact path='/' component={MainBoard} />
             <Route path='/login' component={SignIn} />
@@ -33,8 +34,9 @@ class App extends Component {
             <Route path='/board' component={Dashboard2} />
             <Route path='/sandbox' component={Sandbox} />
             <Route path='/404' component={NotFoundPage}/>
+            <Route path='/ana' component={Anasayfa}/>
           </Switch>
-          <Footer />
+          
         </div>
       </Router>
     );

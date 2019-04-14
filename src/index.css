@@ -13,13 +13,6 @@ body {
       monospace;
   }
 
-  .App{
-      background-color: #f8f8f8
-  }
-  i{
-    font-size: 12px;
-    color: lightgrey;
-  }
   .card .card-title {
     font-weight: 600;
     text-shadow: 2px 1px 2px black;
@@ -36,4 +29,8 @@ body {
   .card .card-content {
     padding: 12px;
     border-radius: 0 0 2px 2px;
+}
+i{
+  font-size: '70px';
+  color:white;
 }
