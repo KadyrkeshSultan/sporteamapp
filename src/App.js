@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <Router history={history}>
         <div className="App">
-          
+        <ButtonAppBar />
           <Switch>
             <Route exact path='/' component={MainBoard} />
             <Route path='/login' component={SignIn} />
