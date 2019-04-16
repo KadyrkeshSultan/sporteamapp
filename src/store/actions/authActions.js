@@ -30,6 +30,16 @@ export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase, getFirestore}) => {
       const firebase = getFirebase();
       const firestore = getFirestore();
+      if(!newUser.firstName){
+          dispatch({type: SIGNUP_ERROR, payload: 'Заполните поле Имя'});
+      }
+      if(!newUser.lastName){
+        dispatch({type: SIGNUP_ERROR, payload: 'Заполните поле Фамилия'});
+      }
+      var regexp = /^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/;
+      if(!regexp.test(newUser.phone)){
+        dispatch({type: SIGNUP_ERROR, payload: 'Неверный номер телефона'});
+      }
   
       firebase.auth().createUserWithEmailAndPassword(
         newUser.email, 
@@ -38,12 +48,13 @@ export const signIn = (credentials) => {
         return firestore.collection('users').doc(resp.user.uid).set({
           firstName: newUser.firstName,
           lastName: newUser.lastName,
-          initials: newUser.firstName[0] + newUser.lastName[0]
+          initials: newUser.firstName[0] + newUser.lastName[0],
+          phone: newUser.phone,
         });
       }).then(() => {
         dispatch({ type: SIGNUP_SUCCESS });
       }).catch((err) => {
-        dispatch({ type: SIGNUP_ERROR, err});
+        dispatch({ type: SIGNUP_ERROR, payload: err.message});
       });
     }
   }

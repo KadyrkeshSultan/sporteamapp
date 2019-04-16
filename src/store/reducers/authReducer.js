@@ -5,7 +5,8 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 const initState = {
-    authError: ''
+    authError: '',
+    signUpIsSuccess: false
   }
   
   const authReducer = (state = initState, action) => {
@@ -28,13 +29,14 @@ const initState = {
       case SIGNUP_SUCCESS:
         return {
           ...state,
-          authError: null
+          authError: null,
+          signUpIsSuccess: true,
         }
   
       case SIGNUP_ERROR:
         return {
           ...state,
-          authError: action.err.message
+          authError: action.payload
         }
   
       default:
