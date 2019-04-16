@@ -18,6 +18,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import AreaDialog from './AreaDialog';
 import FilterList from '@material-ui/icons/FilterList';
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   appBar: {
@@ -78,7 +79,8 @@ class AreaList extends React.Component {
     this.setState({ open: false });
   };
   render() {
-    const { classes, areas } = this.props;
+    const { classes, areas, auth } = this.props;
+    if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
         <main>
@@ -143,6 +145,7 @@ class AreaList extends React.Component {
 const mapStateToProps = (state) => {
   return {
     areas: state.firestore.ordered.sportgrounds,
+    auth: state.firebase.auth
   }
 }
 export default compose(

@@ -18,6 +18,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EventDialog from './EventDialog';
 import FilterList from '@material-ui/icons/FilterList';
+import { Redirect } from 'react-router-dom'
 
 const styles = theme => ({
   appBar: {
@@ -78,7 +79,8 @@ class EventList extends React.Component {
     this.setState({ open: false });
   };
   render() {
-    const { classes, events } = this.props;
+    const { classes, events, auth } = this.props;
+    if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
         <main>
@@ -151,6 +153,7 @@ EventList.propTypes = {
 const mapStateToProps = (state) => {
   return {
     events: state.firestore.ordered.events,
+    auth: state.firebase.auth,
   }
 }
 export default compose(
