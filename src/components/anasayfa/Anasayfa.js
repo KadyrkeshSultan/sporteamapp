@@ -14,7 +14,7 @@ class Anasayfa extends React.Component {
         return <React.Fragment>
             <CssBaseline />
             
-            <Anagrid/>
+            <Anagrid uid={auth.uid}/>
         </React.Fragment>
     }
 }

@@ -18,6 +18,7 @@ import NotFoundPage from './components/layout/NotFoundPage';
 import AreaList from './components/area/AreaList';
 import Anasayfa from './components/anasayfa/Anasayfa';
 import ScrollToTop from './components/layout/ScrollToTop';
+import MyEventList from './components/event/MyEventList';
 class App extends Component {
   render() {
     return (
@@ -30,6 +31,7 @@ class App extends Component {
             <Route path='/login' component={SignIn} />
             <Route path='/signup' component={SignUp} />
             <Route exact path='/events' component={EventList} />
+            <Route exact path='/myevents/:uid' component={MyEventList} />
             <Route path='/events/create' component={CreateEventForm} />
             <Route path='/events/:id' component={EventBoard} />
             <Route exact path='/areas' component={AreaList} />

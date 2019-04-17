@@ -57,14 +57,14 @@ const styles = theme => ({
 });
 
 function Anagrid(props) {
-    const { classes } = props;
+    const { classes, uid } = props;
 
     return (
         <div className={classes.root}>
             <GridList cellHeight={200} spacing={1} className={classes.gridList}>
 
                 <GridListTile >
-                    <Link href="##">
+                    <Link href={"/myevents/" + uid}>
                         <Paper className={classes.paper} elevation={1}>
                             <Typography variant="h5" component="h3" className={classes.h}>
                                 <i className="fas fa-calendar-week"></i>
@@ -102,10 +102,10 @@ function Anagrid(props) {
                 <GridListTile >
                     <Paper className={classes.paper} elevation={1}>
                         <Typography variant="h5" component="h3" className={classes.h}>
-                            <i className="fas fa-shield-alt"></i>
+                            <i className="fas fa-newspaper"></i>
                         </Typography>
                         <Typography component="p" className={classes.p}>
-                            Команды
+                            Новости
             </Typography>
                     </Paper>
                 </GridListTile>
