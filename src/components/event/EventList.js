@@ -157,9 +157,14 @@ const mapStateToProps = (state) => {
   }
 }
 export default compose(
-  withStyles(styles),
-  connect(mapStateToProps),
-  firestoreConnect([
-    { collection: 'events' },
-  ])
-)(EventList)
+    withStyles(styles),
+    connect(mapStateToProps),
+    firestoreConnect([
+      { 
+          collection: 'events',
+          orderBy: [
+              ['createdAt', 'desc']
+          ],
+      },
+    ])
+  )(EventList)
