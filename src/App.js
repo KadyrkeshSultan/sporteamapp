@@ -19,6 +19,8 @@ import AreaList from './components/area/AreaList';
 import Anasayfa from './components/anasayfa/Anasayfa';
 import ScrollToTop from './components/layout/ScrollToTop';
 import MyEventList from './components/event/MyEventList';
+import NewsBoard from './components/news/NewsBoard'
+import NewsList from './components/news/NewsList'
 class App extends Component {
   render() {
     return (
@@ -40,6 +42,8 @@ class App extends Component {
             <Route path='/board' component={Dashboard2} />
             <Route path='/sandbox' component={Sandbox} />
             <Route path='/404' component={NotFoundPage}/>
+            <Route path='/news/:id' component={NewsBoard}/>
+            <Route exact path='/news' component={NewsList}/> 
             <Route path='/ana' component={Anasayfa}/>
           </Switch>
           
