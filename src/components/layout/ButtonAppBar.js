@@ -24,6 +24,7 @@ import EventIcon from '@material-ui/icons/EventAvailable';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import MapIcon from '@material-ui/icons/Map';
+import ShareDialog from './ShareDialog';
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const styles = {
@@ -69,22 +70,28 @@ const menuIcons = [
         url: '/',
         icon: <PeopleIcon/>
     },
-    {
-        text: 'Поделиться',
-        url: '/',
-        icon: <ShareIcon/>
-    }
 ]
 
 class ButtonAppBar extends React.Component {
     state = {
-        open: false
+        open: false,
+        openDialog: false,
     }
 
     toggleDrawer = (open) => () => {
         this.setState({
           open: open,
         });
+    };
+
+    shareOnClick = () => () => {
+        this.setState({
+            openDialog: true,
+        });
+    }
+
+    handleShareDialogClose = () => {
+        this.setState({ openDialog: false });
     };
 
     render() {
@@ -101,6 +108,10 @@ class ButtonAppBar extends React.Component {
                           </ListItem>
                       })
                   }
+                  <ListItem button >
+                                <ListItemIcon><ShareIcon/></ListItemIcon>
+                                <ListItemText onClick={this.shareOnClick()} primary={'Поделиться'} />
+                    </ListItem>
               </List>
               <Divider />
               <List>
@@ -141,6 +152,10 @@ class ButtonAppBar extends React.Component {
                         {sideList}
                     </div>
                 </SwipeableDrawer>
+                <ShareDialog
+                    open={this.state.openDialog}
+                    onClose={this.handleShareDialogClose}
+                />
             </div>
         );
     }
