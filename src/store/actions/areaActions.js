@@ -18,7 +18,57 @@ import {
     IMG_DELETE,
     CREATE_AREA_VALIDATE_FAIL,
     HIDE_ERROR_SNACKBAR,
+    FILE_DELETE,
+    FILE_UPLOAD_ERROR,
+    FILE_UPLOAD_PROGRESS,
+    FILE_UPLOAD_START,
+    FILE_UPLOAD_SUCCESS
 } from '../reducers/areaReducer'
+
+export const fileUploadStart = () => {
+    return (dispatch) => {
+        dispatch({ type: FILE_UPLOAD_START });
+    }
+}
+
+export const fileUploadError = (error) => {
+    return (dispatch) => {
+        dispatch({ type: FILE_UPLOAD_ERROR, payload: error });
+    }
+}
+
+export const fileUploadSuccess = (filename) => {
+    return (dispatch, getState, { getFirebase }) => {
+        var files = getState().area.areaFiles;
+        const fb2 = getFirebase()
+            .storage()
+            .ref('files')
+            .child(filename)
+            .getDownloadURL()
+            .then(url => {
+                files.push({
+                    filename: filename,
+                    url: url
+                });
+                dispatch({ type: FILE_UPLOAD_SUCCESS, payload: files })
+            });
+
+    }
+}
+
+export const fileDelete = (filename) => {
+    return (dispatch, getState, { getFirebase }) => {
+        var files = getState().area.areaFiles;
+        files = files.filter((item) => item.filename !== filename);
+        dispatch({ type: FILE_DELETE, payload: files });
+    }
+}
+
+export const fileUploadProgress = (progress) => {
+    return (dispatch) => {
+        dispatch({ type: FILE_UPLOAD_PROGRESS, payload: progress });
+    }
+}
 
 export const hideSnackbar = () =>{
     return(dispatch) => {
@@ -145,7 +195,8 @@ export const createArea = () => {
             areaTypeId,
             areaSportTypes,
             location,
-            areaImages
+            areaImages,
+            areaFiles,
         } = getState().area;
 
         if (areaName == '' || areaPrice == '' || areaContacts == '' || areaWorktime == '' || location.address == '')
@@ -171,6 +222,7 @@ export const createArea = () => {
                 lastName: profile.lastName
             },
             images: areaImages,
+            files: areaFiles,
             location: location,
             type: firestore.doc(`/sportgrounds/${areaTypeId}`),
             sportTypes: areaSportTypes.map(sporttype => firestore.doc(`/categorySports/${sporttype.id}`)),

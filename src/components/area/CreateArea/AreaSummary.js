@@ -17,6 +17,7 @@ import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import ImageGrid from './ImageGrid';
 import ImageUpload from './ImageUpload';
 import ErrorSnackbar from './ErrorSnackbar';
+import FileUpload from './FileUpload';
 
 const styles = theme => ({
     root: {
@@ -138,8 +139,14 @@ class AreaSummary extends React.Component {
                     </Grid>
                 </Grid>
                 <Typography variant="h6" align='center' gutterBottom>
+                    Прикрепленные файлы
+                </Typography>
+                <Grid container spacing={8} alignItems="flex-end">
+                    <FileUpload />
+                </Grid>
+                <Typography variant="h6" align='center' gutterBottom>
                     Загрузите фотографии
-            </Typography>
+                </Typography>
                 <Grid container spacing={8} alignItems="flex-end">
                     <ImageUpload />
                 </Grid>

@@ -15,6 +15,11 @@ export const IMG_UPLOAD_ERROR = 'IMG_UPLOAD_ERROR';
 export const IMG_UPLOAD_SUCCESS = 'IMG_UPLOAD_SUCCESS';
 export const IMG_UPLOAD_PROGRESS = 'IMG_UPLOAD_PROGRESS';
 export const IMG_DELETE = 'IMG_DELETE';
+export const FILE_UPLOAD_START = 'FILE_UPLOAD_START';
+export const FILE_UPLOAD_ERROR = 'FILE_UPLOAD_ERROR';
+export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
+export const FILE_UPLOAD_PROGRESS = 'FILE_UPLOAD_PROGRESS';
+export const FILE_DELETE = 'FILE_DELETE';
 export const CREATE_AREA_VALIDATE_FAIL = 'CREATE_AREA_VALIDATE_FAIL';
 export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
 
@@ -27,7 +32,13 @@ const initState = {
     areaContacts: '',
     areaWorktime: '',
     areaImages: [],
+    areaFiles: [],
     upload:{
+        isUploading: false,
+        progress: 0,
+        error: ''
+    },
+    fileUpload:{
         isUploading: false,
         progress: 0,
         error: ''
@@ -151,6 +162,50 @@ const areaReducer = (state = initState, action) => {
             return{
                 ...state,
                 areaImages: action.payload
+            }
+        case FILE_UPLOAD_START:
+            console.log(FILE_UPLOAD_START);
+            return{
+                ...state,
+                fileUpload: {
+                    isUploading: true,
+                    progress: 0,
+                    error: '',
+                }
+            }
+        case FILE_UPLOAD_PROGRESS:
+            return{
+                ...state,
+                fileUpload: {
+                    ...state.fileUpload,
+                    progress: action.payload,
+                    error: ''
+                }
+            }
+        case FILE_UPLOAD_ERROR:
+            return{
+                ...state,
+                fileUpload: {
+                    ...state.fileUpload,
+                    isUploading: false,
+                    error: action.payload
+                }
+            }
+        case FILE_UPLOAD_SUCCESS:
+            return{
+                ...state,
+                fileUpload: {
+                    ...state.fileUpload,
+                    isUploading: false,
+                    error: '',
+                    progress: 100,
+                },
+                areaFiles: action.payload
+            }
+        case FILE_DELETE:
+            return{
+                ...state,
+                areaFiles: action.payload
             }
         case CREATE_AREA_VALIDATE_FAIL:
             return{
