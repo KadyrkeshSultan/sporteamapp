@@ -176,7 +176,10 @@ export default compose(
                 collection: 'events',
                 where:[
                     ['user.id', '==', uid]
-                ]
+                ],
+                orderBy: [
+                    ['createdAt', 'desc']
+                ],
              },
         ]
     })
