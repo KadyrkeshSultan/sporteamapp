@@ -9,6 +9,11 @@ export const CHOOSE_ADDRESS = 'CHOOSE_ADDRESS';
 export const EVENT_DESC_CHANGE = 'EVENT_DESC_CHANGE';
 export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
 export const CREATE_EVENT_VALIDATE_FAIL = 'CREATE_EVENT_VALIDATE_FAIL';
+export const FILE_UPLOAD_START = 'FILE_UPLOAD_START';
+export const FILE_UPLOAD_ERROR = 'FILE_UPLOAD_ERROR';
+export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
+export const FILE_UPLOAD_PROGRESS = 'FILE_UPLOAD_PROGRESS';
+export const FILE_DELETE = 'FILE_DELETE';
 
 const initState = {
     validateMsg: '',
@@ -19,13 +24,19 @@ const initState = {
     datetime: new Date(),
     eventDesc: '',
     createEventIsSuccess: false,
+    eventFiles: [],
     location: {
         name: '',
         address: '',
         city: '',
         latitude: 0,
         longitude: 0
-    }
+    },
+    fileUpload:{
+        isUploading: false,
+        progress: 0,
+        error: ''
+    },
 }
 
 const eventReducer = (state = initState, action) => {
@@ -87,6 +98,50 @@ const eventReducer = (state = initState, action) => {
             return{
                 ...state,
                 validateMsg: '',
+            }
+        case FILE_UPLOAD_START:
+            console.log(FILE_UPLOAD_START);
+            return{
+                ...state,
+                fileUpload: {
+                    isUploading: true,
+                    progress: 0,
+                    error: '',
+                }
+            }
+        case FILE_UPLOAD_PROGRESS:
+            return{
+                ...state,
+                fileUpload: {
+                    ...state.fileUpload,
+                    progress: action.payload,
+                    error: ''
+                }
+            }
+        case FILE_UPLOAD_ERROR:
+            return{
+                ...state,
+                fileUpload: {
+                    ...state.fileUpload,
+                    isUploading: false,
+                    error: action.payload
+                }
+            }
+        case FILE_UPLOAD_SUCCESS:
+            return{
+                ...state,
+                fileUpload: {
+                    ...state.fileUpload,
+                    isUploading: false,
+                    error: '',
+                    progress: 100,
+                },
+                eventFiles: action.payload
+            }
+        case FILE_DELETE:
+            return{
+                ...state,
+                eventFiles: action.payload
             }
         default:
             return state;

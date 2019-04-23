@@ -80,7 +80,8 @@ function getStepContent(step, props) {
         eventDesc,
         eventDescChange,
         chooseDate,
-        validateMsg
+        validateMsg,
+        eventFiles,
      } = props;
 
     var event = {
@@ -88,6 +89,7 @@ function getStepContent(step, props) {
         desc: eventDesc,
         datetime: datetime,
         categorySportId: categorySportId,
+        files: eventFiles,
         location: {
             address: location.address
         }
@@ -127,6 +129,7 @@ class CreateEventForm extends React.Component {
             datetime,
             location,
             eventDesc,
+            eventFiles,
         } = this.props;
 
         var event = {
@@ -135,6 +138,7 @@ class CreateEventForm extends React.Component {
             datetime: datetime,
             categorySportId: categorySportId,
             location: location,
+            files: eventFiles,
         };
 
         this.props.createEvent(event);
@@ -210,7 +214,8 @@ const mapStateToProps = (state) => {
         eventDesc: state.event.eventDesc,
         createEventIsSuccess: state.event.createEventIsSuccess,
         validateMsg: state.event.validateMsg,
-        auth: state.firebase.auth
+        auth: state.firebase.auth,
+        eventFiles: state.event.eventFiles,
     }
 }
 

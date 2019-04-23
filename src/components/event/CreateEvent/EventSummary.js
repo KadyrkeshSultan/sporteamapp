@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import ErrorSnackbar from './ErrorSnackbar';
+import FileUpload from './FileUpload';
 
 const styles = theme => ({
   root: {
@@ -66,6 +67,13 @@ class EventSummary extends React.Component {
                 Дополнительная информация
             </Typography>
             <TextField required id='eventDescription' label='Введите доп.информацию' onChange={this.onEventDescChange} value={event.desc} fullWidth/>
+
+            <Typography variant="h6" align='center' gutterBottom>
+                    Прикрепленные файлы
+                </Typography>
+                <Grid container spacing={8} alignItems="flex-end">
+                    <FileUpload />
+                </Grid>
             <Grid container spacing={8} alignItems="flex-end">
                     { validateMsg != '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
             </Grid>

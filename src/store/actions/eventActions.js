@@ -8,7 +8,12 @@ import { CHOOSE_SPORT,
     CREATE_EVENT_SUCCESS,
     CREATE_EVENT_ERROR,
     HIDE_ERROR_SNACKBAR,
-    CREATE_EVENT_VALIDATE_FAIL
+    CREATE_EVENT_VALIDATE_FAIL,
+    FILE_DELETE,
+    FILE_UPLOAD_ERROR,
+    FILE_UPLOAD_PROGRESS,
+    FILE_UPLOAD_START,
+    FILE_UPLOAD_SUCCESS
  } from '../reducers/eventReducer'
 
 export const hideSnackbar = () =>{
@@ -38,6 +43,7 @@ export const createEvent = (event) =>{
             description: event.desc,
             location: event.location,
             createdAt: new Date(),
+            files: event.files,
             user: {
                 id:userId,
                 firstName: profile.firstName,
@@ -85,5 +91,50 @@ export const clickNextBtn = () =>{
 export const clickBackBtn = () =>{
     return (dispatch, getState) =>{
         dispatch({type: CLICK_BACK_BTN});
+    }
+}
+
+export const fileUploadStart = () => {
+    return (dispatch) => {
+        dispatch({ type: FILE_UPLOAD_START });
+    }
+}
+
+export const fileUploadError = (error) => {
+    return (dispatch) => {
+        dispatch({ type: FILE_UPLOAD_ERROR, payload: error });
+    }
+}
+
+export const fileUploadSuccess = (filename) => {
+    return (dispatch, getState, { getFirebase }) => {
+        var files = getState().event.eventFiles;
+        const fb2 = getFirebase()
+            .storage()
+            .ref('files')
+            .child(filename)
+            .getDownloadURL()
+            .then(url => {
+                files.push({
+                    filename: filename,
+                    url: url
+                });
+                dispatch({ type: FILE_UPLOAD_SUCCESS, payload: files })
+            });
+
+    }
+}
+
+export const fileDelete = (filename) => {
+    return (dispatch, getState, { getFirebase }) => {
+        var files = getState().event.eventFiles;
+        files = files.filter((item) => item.filename !== filename);
+        dispatch({ type: FILE_DELETE, payload: files });
+    }
+}
+
+export const fileUploadProgress = (progress) => {
+    return (dispatch) => {
+        dispatch({ type: FILE_UPLOAD_PROGRESS, payload: progress });
     }
 }
