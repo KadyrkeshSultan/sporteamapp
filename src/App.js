@@ -21,6 +21,8 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import MyEventList from './components/event/MyEventList';
 import NewsBoard from './components/news/NewsBoard'
 import NewsList from './components/news/NewsList'
+import About from './components/about/About'
+import Settings from './components/about/Settings'
 class App extends Component {
   render() {
     return (
@@ -45,6 +47,8 @@ class App extends Component {
             <Route path='/news/:id' component={NewsBoard}/>
             <Route exact path='/news' component={NewsList}/> 
             <Route path='/ana' component={Anasayfa}/>
+            <Route path='/about' component={About}/>
+            <Route path='/settings' component={Settings}/>
           </Switch>
           
         </div>
