@@ -21,12 +21,13 @@ import ScrollToTop from './components/layout/ScrollToTop';
 import MyEventList from './components/event/MyEventList';
 import NewsBoard from './components/news/NewsBoard'
 import NewsList from './components/news/NewsList'
+import Feedback from './components/about/Feedback';
 class App extends Component {
   render() {
     return (
       <Router history={history}>
       <ScrollToTop>
-        <div className="App">
+        <div className="App" style={{background: 'lavender'}}>
         <ButtonAppBar />
           <Switch>
             <Route exact path='/' component={Anasayfa} />
@@ -45,6 +46,7 @@ class App extends Component {
             <Route path='/news/:id' component={NewsBoard}/>
             <Route exact path='/news' component={NewsList}/> 
             <Route path='/ana' component={Anasayfa}/>
+            <Route path="/feedback" component={Feedback} />
           </Switch>
           
         </div>

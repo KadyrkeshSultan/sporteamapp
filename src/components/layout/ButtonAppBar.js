@@ -72,6 +72,17 @@ const menuIcons = [
     },
 ]
 
+const submenuIcons = [
+    {
+        text: 'Обратная связь',
+        url: '/feedback'
+    },
+    {
+        text: 'О проекте',
+        url: '/about'
+    },
+]
+
 class ButtonAppBar extends React.Component {
     state = {
         open: false,
@@ -116,9 +127,9 @@ class ButtonAppBar extends React.Component {
               <Divider />
               <List>
                   {
-                      ['Обратная связь', 'О проекте'].map((text, index) => (
-                          <ListItem button key={index}>
-                                <ListItemText primary={text} />
+                      submenuIcons.map((item) => (
+                          <ListItem button component="a" key={item.text} href={item.url}>
+                                <ListItemText primary={item.text} />
                           </ListItem>
                       ))
                   }
