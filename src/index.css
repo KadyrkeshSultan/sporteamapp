@@ -34,3 +34,5 @@ i{
   font-size: '70px';
   color:white;
 }
+
+img[alt=Man] { width: 100%; max-width: 640px;}
