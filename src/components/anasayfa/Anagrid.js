@@ -14,6 +14,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
+import { Link as RouterLink } from 'react-router-dom'
 
 const styles = theme => ({
     root: {
@@ -64,7 +65,7 @@ function Anagrid(props) {
             <GridList cellHeight={200} spacing={1} className={classes.gridList}>
 
                 <GridListTile >
-                    <Link href={"/myevents/" + uid}>
+                    <Link underline="none" component={RouterLink} to={"/myevents/" + uid}>
                         <Paper className={classes.paper} elevation={1}>
                             <Typography variant="h5" component="h3" className={classes.h}>
                                 <i className="fas fa-calendar-week"></i>
@@ -76,7 +77,7 @@ function Anagrid(props) {
                     </Link>
                 </GridListTile>
                 <GridListTile >
-                    <Link href="/events">
+                    <Link underline="none" component={RouterLink} to="/events">
                         <Paper className={classes.paper} elevation={1}>
                             <Typography variant="h5" component="h3" className={classes.h}>
                                 <i className="far fa-calendar-alt"></i>
@@ -88,7 +89,7 @@ function Anagrid(props) {
                     </Link>
                 </GridListTile>
                 <GridListTile >
-                    <Link href="/areas">
+                    <Link underline="none" component={RouterLink} to="/areas">
                         <Paper className={classes.paper} elevation={1}>
                             <Typography variant="h5" component="h3" className={classes.h}>
                                 <i className="fab fa-laravel"></i>
@@ -100,7 +101,7 @@ function Anagrid(props) {
                     </Link>
                 </GridListTile>
                 <GridListTile >
-                    <Link href="/news">
+                    <Link underline="none" component={RouterLink} to="/news">
                         <Paper className={classes.paper} elevation={1}>
                             <Typography variant="h5" component="h3" className={classes.h}>
                                 <i className="fas fa-newspaper"></i>
@@ -122,7 +123,7 @@ function Anagrid(props) {
                     </Paper>
                 </GridListTile>
                 <GridListTile >
-                    <Link href="/events/create">
+                    <Link underline="none" component={RouterLink} to="/events/create">
                         <Paper className={classes.paper} elevation={1}>
                             <Typography variant="h5" component="h3" className={classes.h}>
                                 <i className="fas fa-plus"></i>

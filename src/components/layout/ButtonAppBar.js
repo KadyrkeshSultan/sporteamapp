@@ -1,30 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
-import Button from '@material-ui/core/Button';
-import SignedInLinks from './SignedInLinks';
-import SignedOutLinks from './SignedOutLinks';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 import HomeIcon from '@material-ui/icons/Home';
 import EventIcon from '@material-ui/icons/EventAvailable';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import MapIcon from '@material-ui/icons/Map';
 import ShareDialog from './ShareDialog';
+import { Link as RouterLink } from 'react-router-dom'
 
 const iOS = process.browser && /iPad|iPhone|iPod/.test(navigator.userAgent);
 const styles = {
@@ -113,7 +107,7 @@ class ButtonAppBar extends React.Component {
               <List>
                   {
                       menuIcons.map(item => {
-                          return <ListItem button component="a" href={item.url} key={item.text}>
+                          return <ListItem button component={RouterLink} to={item.url} key={item.text}>
                                 <ListItemIcon>{item.icon}</ListItemIcon>
                                 <ListItemText primary={item.text} />
                           </ListItem>
@@ -128,7 +122,7 @@ class ButtonAppBar extends React.Component {
               <List>
                   {
                       submenuIcons.map((item) => (
-                          <ListItem button component="a" key={item.text} href={item.url}>
+                          <ListItem button component={RouterLink} key={item.text} to={item.url}>
                                 <ListItemText primary={item.text} />
                           </ListItem>
                       ))
