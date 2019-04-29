@@ -22,6 +22,8 @@ import MyEventList from './components/event/MyEventList';
 import NewsBoard from './components/news/NewsBoard'
 import NewsList from './components/news/NewsList'
 import Feedback from './components/about/Feedback';
+import About from './components/about/About'
+import Settings from './components/about/Settings'
 class App extends Component {
   render() {
     return (
@@ -47,6 +49,8 @@ class App extends Component {
             <Route exact path='/news' component={NewsList}/> 
             <Route path='/ana' component={Anasayfa}/>
             <Route path="/feedback" component={Feedback} />
+            <Route path='/about' component={About}/>
+            <Route path='/settings' component={Settings}/>
           </Switch>
           
         </div>
