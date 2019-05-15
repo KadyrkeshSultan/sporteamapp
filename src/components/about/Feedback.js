@@ -8,6 +8,7 @@ class Feedback extends React.Component{
                     height="891" 
                     frameBorder="0" 
                     marginHeight="0"
+                    title={'Обратная связь'}
                     marginWidth="0">Загрузка...
             </iframe>
         </div>

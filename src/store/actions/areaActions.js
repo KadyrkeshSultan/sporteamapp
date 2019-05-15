@@ -40,7 +40,7 @@ export const fileUploadError = (error) => {
 export const fileUploadSuccess = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
         var files = getState().area.areaFiles;
-        const fb2 = getFirebase()
+        getFirebase()
             .storage()
             .ref('files')
             .child(filename)
@@ -91,7 +91,7 @@ export const uploadError = (error) => {
 export const uploadSuccess = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
         var images = getState().area.areaImages;
-        const fb2 = getFirebase()
+        getFirebase()
             .storage()
             .ref('images')
             .child(filename)
@@ -199,7 +199,7 @@ export const createArea = () => {
             areaFiles,
         } = getState().area;
 
-        if (areaName == '' || areaPrice == '' || areaContacts == '' || areaWorktime == '' || location.address == '')
+        if (areaName === '' || areaPrice === '' || areaContacts === '' || areaWorktime === '' || location.address === '')
         {
             dispatch({type: CREATE_AREA_VALIDATE_FAIL, payload: 'Заполните все поля!'});
             return;

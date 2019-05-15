@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -23,7 +22,7 @@ class EventSummary extends React.Component {
     }
   
   render(){
-    const { classes, event, categorySports, validateMsg } = this.props;
+    const { event, categorySports, validateMsg } = this.props;
     const categorySport = categorySports && categorySports.find((item) => {return item.id === event.categorySportId});
 
     return (
@@ -75,7 +74,7 @@ class EventSummary extends React.Component {
                     <FileUpload />
                 </Grid>
             <Grid container spacing={8} alignItems="flex-end">
-                    { validateMsg != '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
+                    { validateMsg !== '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
             </Grid>
         </div>
     );

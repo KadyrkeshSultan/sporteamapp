@@ -4,8 +4,8 @@ class YandexShare extends Component {
   componentDidMount() {
     var yaShare = this.refs.yaShare
     var url = window.location.href;
-    if (window.Ya != undefined){
-        var share = window.Ya.share2(yaShare, {
+    if (window.Ya !== undefined){
+        window.Ya.share2(yaShare, {
             content: {
                 url: url,
                 title: `Sport Calendar`,

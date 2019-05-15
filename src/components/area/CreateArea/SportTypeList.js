@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types, react/jsx-handler-names */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select from 'react-select';
 import { withStyles } from '@material-ui/core/styles';
@@ -186,7 +185,7 @@ class SportTypeList extends React.Component {
             value: sportType.id,
             label: sportType.name,
         }));
-        const sports = types && types.filter((value) => areaSportTypes.find((item) => item.id == value.value) != undefined);
+        const sports = types && types.filter((value) => areaSportTypes.find((item) => item.id === value.value) !== undefined);
         const selectStyles = {
             input: base => ({
                 ...base,

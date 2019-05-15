@@ -7,8 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import {Redirect} from 'react-router-dom';
-import {browserHistory} from 'react-router';
 import history from '../layout/history';
 class AreaCard extends React.Component {
     handleCardClick = (e) =>{

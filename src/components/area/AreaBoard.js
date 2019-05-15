@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
-import { Grid, Typography, Link } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
@@ -44,14 +44,13 @@ const styles = theme => ({
 class AreaBoard extends React.Component {
     render() {
 
-        const { classes, theme, area, areaTypes, sportTypes } = this.props;
-        const areaType = area && (areaTypes && areaTypes.find(item => item.id == area.type.id));
-        const sports = area && (sportTypes && sportTypes.filter(item => area.sportTypes.find(i => i.id == item.id) != undefined));
+        const { classes, area, areaTypes } = this.props;
+        const areaType = area && (areaTypes && areaTypes.find(item => item.id === area.type.id));
         const latitude = area && area.location.latitude;
         const longitude = area && area.location.longitude;
-        const center = (latitude != null && latitude != '') ? [latitude, longitude] : [51.132435, 71.404126];
-        const hintContent = (latitude != null && latitude != '') ? area.location.address : 'Нет данных';
-        const ballonContent = (latitude != null && latitude != '') ? `<strong>${area.name}</strong><br/>${area.location.address}` : 'Нет данных';
+        const center = (latitude != null && latitude !== '') ? [latitude, longitude] : [51.132435, 71.404126];
+        const hintContent = (latitude != null && latitude !== '') ? area.location.address : 'Нет данных';
+        const ballonContent = (latitude != null && latitude !== '') ? `<strong>${area.name}</strong><br/>${area.location.address}` : 'Нет данных';
         const location = {
             center: center,
             hintContent: hintContent,
@@ -70,7 +69,7 @@ class AreaBoard extends React.Component {
                     {
                         area && area.images.map(item => {
                             return <div key={item.filename}>
-                                <img src={item.url} className={classes.imageArea} />
+                                <img src={item.url} alt={'my_picture'} className={classes.imageArea} />
                             </div>
                         })
                     }

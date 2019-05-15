@@ -1,9 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Redirect } from 'react-router-dom'
 import Anagrid from './Anagrid'
-import { withStyles } from '@material-ui/core';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 

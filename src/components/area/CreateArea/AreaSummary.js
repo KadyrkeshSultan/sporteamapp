@@ -1,20 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
 import Info from '@material-ui/icons/InfoOutlined';
 import Phone from '@material-ui/icons/LocalPhoneOutlined';
 import QueryBuilder from '@material-ui/icons/QueryBuilderOutlined';
 import Monetization from '@material-ui/icons/MonetizationOnOutlined';
-import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
-import ImageGrid from './ImageGrid';
 import ImageUpload from './ImageUpload';
 import ErrorSnackbar from './ErrorSnackbar';
 import FileUpload from './FileUpload';
@@ -59,8 +53,8 @@ class AreaSummary extends React.Component {
 
     render() {
         const { classes, area, sportTypes, areaTypes, validateMsg } = this.props;
-        const sports = sportTypes && sportTypes.filter((sportType) => area.areaSportTypes.find((item) => item.id == sportType.id) != undefined);
-        const areaType = areaTypes && areaTypes.find((item) => item.id == area.areaTypeId);
+        const sports = sportTypes && sportTypes.filter((sportType) => area.areaSportTypes.find((item) => item.id === sportType.id) !== undefined);
+        const areaType = areaTypes && areaTypes.find((item) => item.id === area.areaTypeId);
 
         return (
             <div>
@@ -151,7 +145,7 @@ class AreaSummary extends React.Component {
                     <ImageUpload />
                 </Grid>
                 <Grid container spacing={8} alignItems="flex-end">
-                    { validateMsg != '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
+                    { validateMsg !== '' ? <ErrorSnackbar msg={validateMsg} /> : ''}
                 </Grid>
             </div>
         );

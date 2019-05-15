@@ -33,7 +33,7 @@ export const createEvent = (event) =>{
         const firestore = getFirestore();
         const profile = getState().firebase.profile;
         const userId = getState().firebase.auth.uid;
-        if (event.name == '' || event.datetime == null || event.location == null || event.categorySportId == ''){
+        if (event.name === '' || event.datetime == null || event.location == null || event.categorySportId === ''){
             dispatch({type: CREATE_EVENT_VALIDATE_FAIL, payload: 'Заполните все поля'});
             return;
         }
@@ -109,7 +109,7 @@ export const fileUploadError = (error) => {
 export const fileUploadSuccess = (filename) => {
     return (dispatch, getState, { getFirebase }) => {
         var files = getState().event.eventFiles;
-        const fb2 = getFirebase()
+        getFirebase()
             .storage()
             .ref('files')
             .child(filename)

@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import withStyles from '@material-ui/core/styles/withStyles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from '@material-ui/core/Button';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import GridList from '@material-ui/core/GridList';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -25,7 +24,6 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
-import FolderIcon from '@material-ui/icons/Folder';
 import AttachFileIcon from '@material-ui/icons/AttachFileOutlined'
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFileOutlined'
 
@@ -133,7 +131,7 @@ class FileUpload extends Component {
                 </Grid>
 
                 {
-                    error != '' ? <ErrorSnackbar msg={"При загрузке произошла ошибка, повторите позже"} /> : ""
+                    error !== '' ? <ErrorSnackbar msg={"При загрузке произошла ошибка, повторите позже"} /> : ""
                 }
             </React.Fragment>
         )

@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme =>({
@@ -21,13 +19,9 @@ const styles = theme =>({
 
 class NotFoundPage extends React.Component{
     render(){
-        const { classes, events, areas } = this.props;
         return <React.Fragment>
-            <img src="https://factorypattern.co.uk/assets/uploads/2015/07/golf-porcelainedotcom.jpg" width={'100%'}/>
+            <img src="https://factorypattern.co.uk/assets/uploads/2015/07/golf-porcelainedotcom.jpg" width={'100%'} alt={'my_picture'}/>
         </React.Fragment>
     }
 }
-NotFoundPage.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 export default withStyles(styles)(NotFoundPage)

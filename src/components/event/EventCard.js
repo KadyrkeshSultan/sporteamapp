@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
-import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 import 'moment/locale/ru';
 import Avatar from '@material-ui/core/Avatar';

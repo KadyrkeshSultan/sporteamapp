@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
@@ -23,7 +22,7 @@ const styles = theme => ({
 
 class Settings extends React.Component {
     render() {
-        const { classes, events, areas, auth } = this.props;
+        const { classes } = this.props;
 
         return <React.Fragment>
             <CssBaseline />
@@ -33,9 +32,5 @@ class Settings extends React.Component {
         </React.Fragment>
     }
 }
-
-Settings.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
 
 export default withStyles(styles)(Settings);
