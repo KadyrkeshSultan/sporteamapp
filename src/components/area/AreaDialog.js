@@ -10,6 +10,10 @@ import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { selectFilterCity } from '../../store/actions/areaActions';
 
 const suggestions = [
   { label: 'Астана' },
@@ -183,19 +187,15 @@ const components = {
 };
 
 class AreaDialog extends React.Component {
-  state = {
-    single: null,
-    multi: null,
-  };
-
-  handleChange = name => value => {
-    this.setState({
-      [name]: value,
-    });
-  };
+    // handleChangeSports = sports => {
+    //     this.props.selectFilterSports(sports);
+    // }
+    handleChangeCity = city => {
+        this.props.selectFilterCity(city);
+    }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, sports, filterCity, filterSports } = this.props;
 
     const selectStyles = {
       input: base => ({
@@ -215,13 +215,12 @@ class AreaDialog extends React.Component {
             styles={selectStyles}
             options={suggestions}
             components={components}
-            value={this.state.single}
-            onChange={this.handleChange('single')}
+            value={filterCity}
+            onChange={this.handleChangeCity}
             placeholder="Выбор города(Астана)"
-            isClearable
           />
           <div className={classes.divider} />
-          <Select
+          {/* <Select
             classes={classes}
             styles={selectStyles}
             textFieldProps={{
@@ -236,11 +235,38 @@ class AreaDialog extends React.Component {
             onChange={this.handleChange('multi')}
             placeholder="Выберите виды спорта"
             isMulti
-          />
+          /> */}
         </NoSsr>
       </div>
     );
   }
 }
 
-export default withStyles(styles, { withTheme: true })(AreaDialog);
+const mapStateToProps = (state) => {
+    return {
+      //sports: state.firestore.ordered.categorySports,
+      auth: state.firebase.auth,
+      filterCity: state.event.filterCity,
+      //filterSports: state.event.filterSports
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selectFilterCity: (city) => dispatch(selectFilterCity(city)),
+        //selectFilterSports: (sports) => dispatch(selectFilterSports(sports))
+    }
+}
+
+  export default compose(
+      withStyles(styles, { withTheme: true }),
+      connect(mapStateToProps, mapDispatchToProps),
+      firestoreConnect([
+        { 
+            collection: 'categorySports',
+            orderBy: [
+                ['name', 'asc']
+            ],
+        },
+      ])
+)(AreaDialog);

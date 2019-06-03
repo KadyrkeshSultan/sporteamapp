@@ -15,6 +15,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import AreaDialog from './AreaDialog';
 import FilterList from '@material-ui/icons/FilterList';
 import { Redirect } from 'react-router-dom'
+import { applyFilterAreas } from '../../store/actions/areaActions';
 
 const styles = theme => ({
   appBar: {
@@ -74,8 +75,16 @@ class AreaList extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
+  handleCloseApply = () => {
+    this.setState({ open: false });
+    this.props.applyFilterAreas();
+  };
   render() {
-    const { classes, areas, auth } = this.props;
+    const { classes, areas, auth, filterAreas, isFilterApply } = this.props;
+    const resultAreas = !isFilterApply ? areas : filterAreas;
+    const length = resultAreas != null ? resultAreas : 0;
+
     if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
@@ -111,7 +120,7 @@ class AreaList extends React.Component {
                         <Button onClick={this.handleClose} color="primary">
                           Отмена
             </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleCloseApply} color="primary">
                           Применить
             </Button>
                       </DialogActions>
@@ -123,8 +132,15 @@ class AreaList extends React.Component {
           </div>
           <div className={classNames(classes.layout, classes.cardGrid)}>
             {/* End hero unit */}
+            {
+                length < 1 ? <React.Fragment>
+                    <Typography variant="h6" style={{margin: '0 auto', width: '100%', textAlign: 'center'}} gutterBottom>
+                        Нет площадок
+                    </Typography>
+                </React.Fragment>  : ""
+            }
             <Grid container spacing={24}>
-              {areas && areas.map(area => (
+              {resultAreas && resultAreas.map(area => (
                 <Grid item key={area.id} sm={6} md={4} lg={3} style={{ width: '100%' }} >
                   <AreaCard area={area} />
                 </Grid>
@@ -139,20 +155,31 @@ class AreaList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    areas: state.firestore.ordered.sportgrounds,
-    auth: state.firebase.auth
+    console.log('filterAreas', state.area.filterAreas);
+    console.log('State', state);
+    return {
+      areas: state.firestore.ordered.sportgrounds,
+      filterAreas: state.area.filterAreas,
+      isFilterApply: state.area.isFilterApply,
+      auth: state.firebase.auth,
+    }
   }
-}
-export default compose(
-    withStyles(styles),
-    connect(mapStateToProps),
-    firestoreConnect([
-      { 
-          collection: 'sportgrounds',
-          orderBy: [
-              ['createdAt', 'desc']
-          ],
-      },
-    ])
-)(AreaList)
+  
+  const mapDispatchToProps = (dispatch) => {
+      return {
+          applyFilterAreas: () => dispatch(applyFilterAreas()),
+      }
+  }
+  
+  export default compose(
+      withStyles(styles),
+      connect(mapStateToProps, mapDispatchToProps),
+      firestoreConnect([
+        { 
+            collection: 'sportgrounds',
+            orderBy: [
+                ['createdAt', 'desc']
+            ],
+        },
+      ])
+)(AreaList);

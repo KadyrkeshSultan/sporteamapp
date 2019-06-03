@@ -22,9 +22,16 @@ export const FILE_UPLOAD_PROGRESS = 'FILE_UPLOAD_PROGRESS';
 export const FILE_DELETE = 'FILE_DELETE';
 export const CREATE_AREA_VALIDATE_FAIL = 'CREATE_AREA_VALIDATE_FAIL';
 export const HIDE_ERROR_SNACKBAR = 'HIDE_ERROR_SNACKBAR';
+export const SELECT_FILTER_CITY = 'SELECT_FILTER_CITY';
+export const SELECT_FILTER_SPORTS = 'SELECT_FILTER_SPORTS';
+export const APPLY_FILTER_EVENTS = 'APPLY_FILTER_EVENTS';
 
 const initState = {
     validateMsg: '',
+    filterAreas: [],
+    isFilterApply: false,
+    filterCity: null,
+    filterSports: null,
     areaName: '',
     areaTypeId: null,
     areaPrice: '',
@@ -220,6 +227,17 @@ const areaReducer = (state = initState, action) => {
                     ...state.upload,
                     error: ''
                 }
+            }
+        case SELECT_FILTER_CITY:
+            return{
+                ...state,
+                filterCity: action.payload
+            }
+        case APPLY_FILTER_EVENTS:
+            return{
+                ...state,
+                filterAreas: action.payload,
+                isFilterApply: action.isFilterApply,
             }
         default:
             return state;
