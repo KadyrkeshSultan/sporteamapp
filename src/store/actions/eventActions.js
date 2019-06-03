@@ -13,7 +13,8 @@ import { CHOOSE_SPORT,
     FILE_UPLOAD_ERROR,
     FILE_UPLOAD_PROGRESS,
     FILE_UPLOAD_START,
-    FILE_UPLOAD_SUCCESS
+    FILE_UPLOAD_SUCCESS,
+    CHOOSE_EVENTLIST_DATE
  } from '../reducers/eventReducer'
 
 export const hideSnackbar = () =>{
@@ -55,6 +56,12 @@ export const createEvent = (event) =>{
         }).catch(() => {
             dispatch({type: CREATE_EVENT_ERROR, payload: false})
         });
+    }
+}
+
+export const chooseEventlistDate = (date) => {
+    return (dispatch) => {
+        dispatch({type: CHOOSE_EVENTLIST_DATE, payload: date});
     }
 }
 

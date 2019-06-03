@@ -14,6 +14,7 @@ export const FILE_UPLOAD_ERROR = 'FILE_UPLOAD_ERROR';
 export const FILE_UPLOAD_SUCCESS = 'FILE_UPLOAD_SUCCESS';
 export const FILE_UPLOAD_PROGRESS = 'FILE_UPLOAD_PROGRESS';
 export const FILE_DELETE = 'FILE_DELETE';
+export const CHOOSE_EVENTLIST_DATE = 'CHOOSE_EVENTLIST_DATE';
 
 const initState = {
     validateMsg: '',
@@ -22,6 +23,7 @@ const initState = {
     activeStep: 0,
     eventName: '',
     datetime: new Date(),
+    eventListDate: new Date(),
     eventDesc: '',
     createEventIsSuccess: false,
     eventFiles: [],
@@ -76,6 +78,11 @@ const eventReducer = (state = initState, action) => {
             return{
                 ...state,
                 datetime: action.payload
+            }
+        case CHOOSE_EVENTLIST_DATE:
+            return{
+                ...state,
+                eventListDate: action.payload
             }
         case CREATE_EVENT_SUCCESS:
             return {
