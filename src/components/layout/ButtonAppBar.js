@@ -61,7 +61,7 @@ const menuIcons = [
     },
     {
         text: 'Участники',
-        url: '/',
+        url: '/users',
         icon: <PeopleIcon/>
     },
 ]

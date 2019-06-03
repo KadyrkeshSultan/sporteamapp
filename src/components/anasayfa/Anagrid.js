@@ -104,14 +104,16 @@ function Anagrid(props) {
                     </Link>
                 </GridListTile>
                 <GridListTile >
-                    <Paper className={classes.paper} elevation={1}>
-                        <Typography variant="h5" component="h3" className={classes.h}>
-                            <i className="fas fa-user-friends"></i>
-                        </Typography>
-                        <Typography component="p" className={classes.p}>
-                            Участники
-            </Typography>
-                    </Paper>
+                    <Link underline="none" component={RouterLink} to="/users">
+                        <Paper className={classes.paper} elevation={1}>
+                            <Typography variant="h5" component="h3" className={classes.h}>
+                                <i className="fas fa-user-friends"></i>
+                            </Typography>
+                            <Typography component="p" className={classes.p}>
+                                Участники
+                            </Typography>
+                        </Paper>
+                    </Link>
                 </GridListTile>
                 <GridListTile >
                     <Link underline="none" component={RouterLink} to="/events/create">

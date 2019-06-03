@@ -36,3 +36,6 @@ i{
 }
 
 img[alt=Man] { width: 100%; max-width: 640px;}
+div.App{
+    min-height: 100vh;
+}
