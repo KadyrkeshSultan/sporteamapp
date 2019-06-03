@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import YandexShare from '../layout/YandexShare';
 import { YMaps, Map, GeoObject } from 'react-yandex-maps';
+import LocationIcon from '@material-ui/icons/LocationOnOutlined';
 
 const styles = theme => ({
     icon: {
@@ -77,7 +78,7 @@ class AreaBoard extends React.Component {
                 <br />
                 <Grid container spacing={24}>
                     <Grid item xs={12} md={6} style={{ paddingLeft: '30px' }}>
-                        <Typography component="p"><i className="fas fa-location-arrow"></i> {area && area.location.address}</Typography>
+                        <Typography component="p"><LocationIcon fontSize='inherit' />{area && area.location.address}</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <blockquote>

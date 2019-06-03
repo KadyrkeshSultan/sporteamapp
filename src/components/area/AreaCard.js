@@ -8,6 +8,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import history from '../layout/history';
+import LocationIcon from '@material-ui/icons/LocationOnOutlined';
 class AreaCard extends React.Component {
     handleCardClick = (e) =>{
         history.push('/areas/' + e.currentTarget.id);
@@ -38,9 +39,11 @@ class AreaCard extends React.Component {
                     <Typography component="p" variant="inherit" noWrap>
                         {areaType && areaType.name}
                     </Typography>
-                    <Typography variant="inherit" noWrap>
-                        <i className="fas fa-location-arrow"></i>{location.address}
-                    </Typography>
+                    {
+                        location.address && <Typography variant="inherit" noWrap>
+                            <LocationIcon fontSize='inherit'/>{location.address}
+                        </Typography>
+                    }
                 </CardContent>
             </CardActionArea>
         </Card>

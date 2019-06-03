@@ -12,6 +12,7 @@ import 'moment/locale/ru';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import history from '../layout/history';
+import LocationIcon from '@material-ui/icons/LocationOnOutlined';
 
 const styles = {
     card: {
@@ -65,9 +66,11 @@ class EventCard extends React.Component {
                             {categorySport == null ? "Спорт" : categorySport.name}
                         </Grid>
 
-                        <Typography variant="inherit" noWrap>
-                            <i className="fas fa-location-arrow"></i>{event.location.address}
-                        </Typography>
+                        {
+                            event.location.address && <Typography variant="inherit" noWrap>
+                                <LocationIcon fontSize='inherit' />{event.location.address}
+                            </Typography>
+                        }
                     </CardContent>
                 </CardActionArea>
             </Card>

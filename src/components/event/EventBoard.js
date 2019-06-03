@@ -14,6 +14,7 @@ import { firestoreConnect } from 'react-redux-firebase';
 import moment from 'moment';
 import 'moment/locale/ru';
 import YandexShare from '../layout/YandexShare';
+import LocationIcon from '@material-ui/icons/LocationOnOutlined';
 
 const styles = theme => ({
     icon: {
@@ -131,9 +132,7 @@ class EventBoard extends React.Component {
                             <Avatar src={categorySport == null ? templatePic : categorySport.pictureUrl} className={classes.bigAvatar} />
                             <div className={classes.details}>
                                 <CardContent className={classes.content}>
-                                    {/* <Typography component="p" >{event.id && event.address}</Typography> */}
-                                    <Typography component="p" ><i className="fas fa-location-arrow"></i>{event && event.location.address}</Typography>
-                                    {/* <Typography component="p" ><i className="fas fa-subway"></i> Динамо</Typography> */}
+                                    <Typography component="p" ><LocationIcon fontSize='inherit'/> {event && event.location.address}</Typography>
                                     <Link href={"asdas"}>Показать на карте</Link>
                                 </CardContent>
                             </div>
