@@ -78,6 +78,7 @@ class EventList extends React.Component {
   };
   render() {
     const { classes, events, auth } = this.props;
+    const length = events != null ? events.length : 0;
     if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
@@ -129,6 +130,13 @@ class EventList extends React.Component {
           </div>
           <div className={classNames(classes.layout, classes.cardGrid)}>
             {/* End hero unit */}
+            {
+                length < 1 ? <React.Fragment>
+                    <Typography variant="h6" style={{margin: '0 auto', width: '100%', textAlign: 'center'}} gutterBottom>
+                        Мероприятий не запланировано
+                    </Typography>
+                </React.Fragment>  : ""
+            }
             <Grid container spacing={24}>
               {events && events.map(event => (
                 <Grid item key={event.id} sm={6} md={4} lg={3} style={{ width: '100%' }} >

@@ -17,6 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EventDialog from './EventDialog';
 import FilterList from '@material-ui/icons/FilterList';
 import { Redirect } from 'react-router-dom'
+import EventCalendar from './EventCalendar';
 
 const styles = theme => ({
   appBar: {
@@ -78,6 +79,7 @@ class MyEventList extends React.Component {
   };
   render() {
     const { classes, events, auth } = this.props;
+    const length = events != null ? events.length : 0;
     if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
@@ -88,6 +90,7 @@ class MyEventList extends React.Component {
               <Typography component="h1" variant="h4" align="center" color="textPrimary" gutterBottom>
                 Мои события
             </Typography>
+            <EventCalendar />
               {/* <Typography variant="h6" align="center" color="textSecondary" paragraph>
                 Найдите подходящее вам событие или создайте событие
             </Typography> */}
@@ -131,13 +134,10 @@ class MyEventList extends React.Component {
             {/* End hero unit */}
             <Grid container spacing={24}>
             {
-                events && events.length < 1 ? <React.Fragment>
+                length < 1 ? <React.Fragment>
                     <Typography variant="h6" style={{margin: '0 auto', width: '100%', textAlign: 'center'}} gutterBottom>
                         Мероприятий не запланировано
                     </Typography>
-                    {/* <Typography variant="subtitle1" gutterBottom style={{margin: '0 auto', width: '100%', textAlign: 'center'}}>
-                        Создай событие или 
-                    </Typography> */}
                 </React.Fragment>  : ""
             }
               {events && events.map(event => (
