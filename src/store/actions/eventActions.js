@@ -63,8 +63,27 @@ export const createEvent = (event) =>{
 }
 
 export const chooseEventlistDate = (date) => {
-    return (dispatch) => {
-        dispatch({type: CHOOSE_EVENTLIST_DATE, payload: date});
+    return (dispatch, getState, {getFirestore}) => {
+        const state = getState();
+        const store = getFirestore();
+        const uid = state.firebase.auth.uid;
+        var eDay = date;
+        const day = new Date(eDay.getFullYear(), eDay.getMonth(), eDay.getDate());
+        store.collection('events').where('user.id', '==', uid).get()
+            .then(snapshot => {
+                var myEvents = [];
+                snapshot.forEach(doc => {
+                    var event = {...doc.data(), id: doc.id};
+                    var eventDay = event.date.toDate();
+                    eventDay = new Date(eventDay.getFullYear(), eventDay.getMonth(), eventDay.getDate());
+                    if(eventDay.getTime() === day.getTime()){
+                        console.log('OK');
+                        myEvents.push(event);
+                    }
+                })
+
+                dispatch({type: CHOOSE_EVENTLIST_DATE, payload: date, myEvents: myEvents});
+            })
     }
 }
 

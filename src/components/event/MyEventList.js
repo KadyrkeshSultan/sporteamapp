@@ -78,8 +78,9 @@ class MyEventList extends React.Component {
     this.setState({ open: false });
   };
   render() {
-    const { classes, events, auth } = this.props;
-    const length = events != null ? events.length : 0;
+    const { classes, events, auth, day, myEvents } = this.props;
+    const dayEvents = myEvents.length === 0 ? events : myEvents;
+    const length = dayEvents != null ? dayEvents.length : 0;
     if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
@@ -101,10 +102,6 @@ class MyEventList extends React.Component {
                   </Button>
                   &nbsp;
                   <div>
-                    <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-                    <FilterList />
-                      Фильтр
-                </Button>
                     <Dialog
                       open={this.state.open}
                       onClose={this.handleClose}
@@ -140,7 +137,7 @@ class MyEventList extends React.Component {
                     </Typography>
                 </React.Fragment>  : ""
             }
-              {events && events.map(event => (
+              {dayEvents && dayEvents.map(event => (
                 <Grid item key={event.id} sm={6} md={4} lg={3} style={{ width: '100%' }} >
                   <EventCard event={event} />
                 </Grid>
@@ -159,9 +156,12 @@ MyEventList.propTypes = {
 };
 
 const mapStateToProps = (state) => {
+    console.log('State', state);
   return {
-    events: state.firestore.ordered.events,
+    day: state.event.eventListDate,
+    events: state.firestore.ordered.myevents,
     auth: state.firebase.auth,
+    myEvents: state.event.myEvents,
   }
 }
 export default compose(
@@ -178,6 +178,7 @@ export default compose(
                 orderBy: [
                     ['createdAt', 'desc']
                 ],
+                storeAs: 'myevents'
              },
         ]
     })

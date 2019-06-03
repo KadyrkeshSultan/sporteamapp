@@ -23,6 +23,7 @@ const initState = {
     validateMsg: '',
     events : [],
     filterEvents: [],
+    myEvents: [],
     isFilterApply: false,
     categorySportId: '1',
     activeStep: 0,
@@ -89,7 +90,8 @@ const eventReducer = (state = initState, action) => {
         case CHOOSE_EVENTLIST_DATE:
             return{
                 ...state,
-                eventListDate: action.payload
+                eventListDate: action.payload,
+                myEvents: action.myEvents,
             }
         case CREATE_EVENT_SUCCESS:
             return {
