@@ -2,6 +2,7 @@ import React from 'react';
 import classNames from 'classnames';
 import IconButton from '@material-ui/core/IconButton';
 import Grid from '@material-ui/core/Grid';
+import { Redirect } from 'react-router-dom'
 import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -65,8 +66,8 @@ const styles = theme => ({
 
 
 function UserList(props) {
-  const { classes, users } = props;
-    console.log(users);
+  const { classes, users, auth } = props;
+    if (!auth.uid) return <Redirect to='/login' />
   return (
     <React.Fragment>
       <main>
