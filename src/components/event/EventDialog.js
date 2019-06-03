@@ -231,7 +231,7 @@ class EventDialog extends React.Component {
             value={filterSports}
             onChange={this.handleChangeSports}
             placeholder="Выберите виды спорта"
-            isMulti
+            // isMulti
           />
         </NoSsr>
       </div>

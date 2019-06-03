@@ -17,6 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import EventDialog from './EventDialog';
 import FilterList from '@material-ui/icons/FilterList';
 import { Redirect } from 'react-router-dom'
+import { applyFilterEvents } from '../../store/actions/eventActions';
 
 const styles = theme => ({
   appBar: {
@@ -76,9 +77,15 @@ class EventList extends React.Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+  
+  handleCloseApply = () => {
+    this.setState({ open: false });
+    this.props.applyFilterEvents();
+  };
   render() {
-    const { classes, events, auth } = this.props;
-    const length = events != null ? events.length : 0;
+    const { classes, events, auth, filterEvents, isFilterApply } = this.props;
+    const resultEvents = !isFilterApply ? events : filterEvents;
+    const length = resultEvents != null ? resultEvents : 0;
     if (!auth.uid) return <Redirect to='/login' />
     return (
       <React.Fragment>
@@ -120,7 +127,7 @@ class EventList extends React.Component {
                         <Button onClick={this.handleClose} color="primary">
                           Отмена
             </Button>
-                        <Button onClick={this.handleClose} color="primary">
+                        <Button onClick={this.handleCloseApply} color="primary">
                           Применить
             </Button>
                       </DialogActions>
@@ -135,12 +142,12 @@ class EventList extends React.Component {
             {
                 length < 1 ? <React.Fragment>
                     <Typography variant="h6" style={{margin: '0 auto', width: '100%', textAlign: 'center'}} gutterBottom>
-                        Мероприятий не запланировано
+                        Мероприятий не найдено
                     </Typography>
                 </React.Fragment>  : ""
             }
             <Grid container spacing={24}>
-              {events && events.map(event => (
+              {resultEvents && resultEvents.map(event => (
                 <Grid item key={event.id} sm={6} md={4} lg={3} style={{ width: '100%' }} >
                   <EventCard event={event} />
                 </Grid>
@@ -161,12 +168,21 @@ EventList.propTypes = {
 const mapStateToProps = (state) => {
   return {
     events: state.firestore.ordered.events,
+    filterEvents: state.event.filterEvents,
+    isFilterApply: state.event.isFilterApply,
     auth: state.firebase.auth,
   }
 }
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        applyFilterEvents: () => dispatch(applyFilterEvents()),
+    }
+}
+
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps),
+    connect(mapStateToProps, mapDispatchToProps),
     firestoreConnect([
       { 
           collection: 'events',
