@@ -1,6 +1,5 @@
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Redirect } from 'react-router-dom'
 import Anagrid from './Anagrid'
 import { compose } from 'redux';
 import { connect } from 'react-redux';

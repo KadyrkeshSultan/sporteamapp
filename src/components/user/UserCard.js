@@ -16,9 +16,6 @@ const styles = {
   media: {
     height: 140,
   },
-  card:{
-      
-  }
 };
 
 function UserCard(props) {
