@@ -17,6 +17,7 @@ import EventIcon from '@material-ui/icons/EventAvailable';
 import ShareIcon from '@material-ui/icons/Share';
 import PeopleIcon from '@material-ui/icons/People';
 import MapIcon from '@material-ui/icons/Map';
+import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import ShareDialog from './ShareDialog';
 import { Link as RouterLink } from 'react-router-dom'
 
@@ -63,6 +64,11 @@ const menuIcons = [
         text: 'Участники',
         url: '/users',
         icon: <PeopleIcon/>
+    },
+    {
+        text: 'Настройки',
+        url: '/settings',
+        icon: <SettingsIcon/>
     },
 ]
 
