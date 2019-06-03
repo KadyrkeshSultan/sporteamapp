@@ -10,7 +10,11 @@ import Paper from '@material-ui/core/Paper';
 import Chip from '@material-ui/core/Chip';
 import MenuItem from '@material-ui/core/MenuItem';
 import CancelIcon from '@material-ui/icons/Cancel';
+import { compose } from 'redux';
+import { connect } from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
 import { emphasize } from '@material-ui/core/styles/colorManipulator';
+import { selectFilterCity, selectFilterSports } from '../../store/actions/eventActions';
 
 const suggestions = [
   { label: 'Астана' },
@@ -19,14 +23,6 @@ const suggestions = [
   value: suggestion.label,
   label: suggestion.label,
 }));
-
-const suggestions2 = [
-    { label: 'Футбол' },
-    { label: 'Баскетбол' },
-  ].map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label,
-  }));
 
 const styles = theme => ({
   root: {
@@ -183,20 +179,20 @@ const components = {
   ValueContainer,
 };
 
-class Event extends React.Component {
-  state = {
-    single: null,
-    multi: null,
-  };
-
-  handleChange = name => value => {
-    this.setState({
-      [name]: value,
-    });
-  };
+class EventDialog extends React.Component {
+  handleChangeSports = sports => {
+      this.props.selectFilterSports(sports);
+  }
+  handleChangeCity = city => {
+      this.props.selectFilterCity(city);
+  }
 
   render() {
-    const { classes, theme } = this.props;
+    const { classes, theme, sports, filterCity, filterSports } = this.props;
+    var sporttypes = sports && sports.map((sport) => ({
+        value: sport.id,
+        label: sport.name,
+      }));
 
     const selectStyles = {
       input: base => ({
@@ -216,10 +212,9 @@ class Event extends React.Component {
             styles={selectStyles}
             options={suggestions}
             components={components}
-            value={this.state.single}
-            onChange={this.handleChange('single')}
+            value={filterCity}
+            onChange={this.handleChangeCity}
             placeholder="Выбор города(Астана)"
-            isClearable
           />
           <div className={classes.divider} />
           <Select
@@ -231,10 +226,10 @@ class Event extends React.Component {
                 shrink: true,
               },
             }}
-            options={suggestions2}
+            options={sporttypes}
             components={components}
-            value={this.state.multi}
-            onChange={this.handleChange('multi')}
+            value={filterSports}
+            onChange={this.handleChangeSports}
             placeholder="Выберите виды спорта"
             isMulti
           />
@@ -249,4 +244,31 @@ Event.propTypes = {
   theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Event);
+const mapStateToProps = (state) => {
+    return {
+      sports: state.firestore.ordered.categorySports,
+      auth: state.firebase.auth,
+      filterCity: state.event.filterCity,
+      filterSports: state.event.filterSports
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        selectFilterCity: (city) => dispatch(selectFilterCity(city)),
+        selectFilterSports: (sports) => dispatch(selectFilterSports(sports))
+    }
+}
+
+  export default compose(
+      withStyles(styles, { withTheme: true }),
+      connect(mapStateToProps, mapDispatchToProps),
+      firestoreConnect([
+        { 
+            collection: 'categorySports',
+            orderBy: [
+                ['name', 'asc']
+            ],
+        },
+      ])
+)(EventDialog);

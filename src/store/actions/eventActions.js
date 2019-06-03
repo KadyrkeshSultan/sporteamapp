@@ -14,7 +14,9 @@ import { CHOOSE_SPORT,
     FILE_UPLOAD_PROGRESS,
     FILE_UPLOAD_START,
     FILE_UPLOAD_SUCCESS,
-    CHOOSE_EVENTLIST_DATE
+    CHOOSE_EVENTLIST_DATE,
+    SELECT_FILTER_CITY,
+    SELECT_FILTER_SPORTS
  } from '../reducers/eventReducer'
 
 export const hideSnackbar = () =>{
@@ -62,6 +64,18 @@ export const createEvent = (event) =>{
 export const chooseEventlistDate = (date) => {
     return (dispatch) => {
         dispatch({type: CHOOSE_EVENTLIST_DATE, payload: date});
+    }
+}
+
+export const selectFilterCity = (city) => {
+    return (dispatch) => {
+        dispatch({type: SELECT_FILTER_CITY, payload: city});
+    }
+}
+
+export const selectFilterSports = (sports) => {
+    return (dispatch) => {
+        dispatch({type: SELECT_FILTER_SPORTS, payload: sports});
     }
 }
 

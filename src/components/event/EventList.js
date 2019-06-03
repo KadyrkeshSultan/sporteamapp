@@ -104,8 +104,10 @@ class EventList extends React.Component {
                       Фильтр
                 </Button>
                     <Dialog
+                      fullScreen
                       open={this.state.open}
                       onClose={this.handleClose}
+                      scroll={'paper'}
                       fullWidth={true}
                       maxWidth={'sm'}
                       aria-labelledby="form-dialog-title"
