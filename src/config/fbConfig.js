@@ -5,12 +5,13 @@ import 'firebase/storage';
 
 // Replace this with your own config details
 var config = {
-    apiKey: "AIzaSyC2SMCccYCdzP5dbMa2qgwu18hQHmcV5HE",
-    authDomain: "sportreact-526d8.firebaseapp.com",
-    databaseURL: "https://sportreact-526d8.firebaseio.com",
-    projectId: "sportreact-526d8",
-    storageBucket: "sportreact-526d8.appspot.com",
-    messagingSenderId: "706328237252"
+    apiKey: "AIzaSyDn0ifnowz08OzYtpTGyJrX5b0KogN6ZO4",
+    authDomain: "sportcalendarkz-eb77c.firebaseapp.com",
+    databaseURL: "https://sportcalendarkz-eb77c.firebaseio.com",
+    projectId: "sportcalendarkz-eb77c",
+    storageBucket: "sportcalendarkz-eb77c.appspot.com",
+    messagingSenderId: "826003715165",
+    appId: "1:826003715165:web:559cc196cc93d3fb"
 };
 firebase.initializeApp(config);
 firebase.firestore().settings({ timestampsInSnapshots: true });
