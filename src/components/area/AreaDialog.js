@@ -15,14 +15,6 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { selectFilterCity } from '../../store/actions/areaActions';
 
-const suggestions = [
-  { label: 'Астана' },
-  { label: 'Алматы' },
-].map(suggestion => ({
-  value: suggestion.label,
-  label: suggestion.label,
-}));
-
 const suggestions2 = [
     { label: 'Футбол' },
     { label: 'Баскетбол' },
@@ -195,7 +187,7 @@ class AreaDialog extends React.Component {
     }
 
   render() {
-    const { classes, theme, sports, filterCity, filterSports } = this.props;
+    const { classes, theme, sports, filterCity, filterSports, cities } = this.props;
 
     const selectStyles = {
       input: base => ({
@@ -213,11 +205,11 @@ class AreaDialog extends React.Component {
           <Select
             classes={classes}
             styles={selectStyles}
-            options={suggestions}
+            options={cities}
             components={components}
             value={filterCity}
             onChange={this.handleChangeCity}
-            placeholder="Выбор города(Астана)"
+            placeholder="Выбор города"
           />
           <div className={classes.divider} />
           {/* <Select
@@ -247,6 +239,7 @@ const mapStateToProps = (state) => {
       //sports: state.firestore.ordered.categorySports,
       auth: state.firebase.auth,
       filterCity: state.event.filterCity,
+      cities: state.firestore.ordered.cities,
       //filterSports: state.event.filterSports
     }
 }
@@ -267,6 +260,9 @@ const mapDispatchToProps = (dispatch) => {
             orderBy: [
                 ['name', 'asc']
             ],
+        },
+        {
+            collection: 'cities',
         },
       ])
 )(AreaDialog);

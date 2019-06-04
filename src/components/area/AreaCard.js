@@ -28,7 +28,7 @@ class AreaCard extends React.Component {
                     <CardMedia
                         component="img"
                         alt="Contemplative Reptile"
-                        image={images[0].url}
+                        image={images && images[0].url}
                         height="inherit"
                     />
                 </div>
