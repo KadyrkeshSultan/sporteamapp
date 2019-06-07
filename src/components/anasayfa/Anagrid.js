@@ -9,7 +9,7 @@ import { Link as RouterLink } from 'react-router-dom'
 
 const styles = () => ({
     root: {
-        background: 'url("http://f1rstclassfitness.com.au/wp-content/uploads/2017/11/Summit-Group-Fitness-Website-500x1000.jpg");',
+        background: 'url("./img/wall.jpg");',
         padding: 6,
     },
     paper: {
