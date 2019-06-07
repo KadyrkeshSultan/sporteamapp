@@ -109,6 +109,7 @@ class AreaList extends React.Component {
                       open={this.state.open}
                       onClose={this.handleClose}
                       fullWidth={true}
+                      fullScreen
                       maxWidth={'sm'}
                       aria-labelledby="form-dialog-title"
                     >
