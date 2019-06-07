@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Redirect } from 'react-router-dom'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
@@ -15,7 +14,6 @@ import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
 import ExitIcon from '@material-ui/icons/ExitToApp';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { firestoreConnect } from 'react-redux-firebase';
 import {signOut} from '../../store/actions/authActions';
 
 const styles = theme => ({

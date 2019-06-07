@@ -15,7 +15,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import EventDialog from './EventDialog';
-import FilterList from '@material-ui/icons/FilterList';
 import { Redirect } from 'react-router-dom'
 import EventCalendar from './EventCalendar';
 
@@ -78,7 +77,7 @@ class MyEventList extends React.Component {
     this.setState({ open: false });
   };
   render() {
-    const { classes, events, auth, day, myEvents } = this.props;
+    const { classes, events, auth, myEvents } = this.props;
     const dayEvents = myEvents.length === 0 ? events : myEvents;
     const length = dayEvents != null ? dayEvents.length : 0;
     if (!auth.uid) return <Redirect to='/login' />

@@ -15,14 +15,6 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { selectFilterCity } from '../../store/actions/areaActions';
 
-const suggestions2 = [
-    { label: 'Футбол' },
-    { label: 'Баскетбол' },
-  ].map(suggestion => ({
-    value: suggestion.label,
-    label: suggestion.label,
-  }));
-
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -187,7 +179,7 @@ class AreaDialog extends React.Component {
     }
 
   render() {
-    const { classes, theme, sports, filterCity, filterSports, cities } = this.props;
+    const { classes, theme, filterCity, cities } = this.props;
 
     const selectStyles = {
       input: base => ({
